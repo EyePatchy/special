@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>^^</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <div class="heart-container">
+        <div class="heart" id="heart">♥</div>
+    </div>
+
+    <!-- Cake Container -->
+    <div id="cake-container" class="hidden">
+        <div id="birthday-cake">
+            <div class="cake">
+                <div class="middle"></div>
+                <div class="chocs"></div>
+                <div class="top"></div>
+            </div>
+            <div class="candles">
+                <div class="flame"></div>
+                <div class="flame2"></div>
+                <div class="flame3"></div>
+            </div>
+            <div class="text">Happy Birthday Parnian! Love you so much <3</div>
+        </div>
+    </div>
+
+    <audio id="birthdayMusic" src="Media/song.mp3"></audio>
+
+    <script>
+        document.getElementById('heart').addEventListener('click', function() {
+            const heart = document.getElementById('heart');
+            const cakeContainer = document.getElementById('cake-container');
+            const birthdayMusic = document.getElementById('birthdayMusic');
+            const startTime = 57;
+
+            // Play the birthday music
+            birthdayMusic.currentTime = startTime;
+            birthdayMusic.play();
+
+            // Fade out the heart
+            heart.style.transition = 'opacity 2s ease-in-out';
+            heart.style.opacity = 0;
+
+            // After the heart fades out, show the cake with a scale animation
+            setTimeout(function() {
+                heart.style.display = 'none'; // Remove the heart from display
+                cakeContainer.classList.remove('hidden');
+                cakeContainer.classList.add('show-cake'); // Apply the cake animation
+            }, 2000);
+        });
+
+        // Candle blowing effect
+        document.querySelectorAll('.candles').forEach(function(candle) {
+            candle.addEventListener('click', function() {
+                document.querySelectorAll('.flame, .flame2, .flame3').forEach(function(flame) {
+                    flame.style.transition = 'opacity 1s ease';
+                    flame.style.opacity = 0;
+                });
+
+                // Show the birthday message with animation after blowing out candles
+                setTimeout(function() {
+                    const text = document.querySelector('.text');
+                    text.classList.add('show-text');
+                }, 1000);
+            });
+        });
+    </script>
+</body>
+
+</html>
